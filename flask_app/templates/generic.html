@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+  <head>
+    <title>Authors' Favorite Books</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="static/assets/css/main.css" />
+    <noscript
+      ><link rel="stylesheet" href="static/assets/css/noscript.css"
+    /></noscript>
+  </head>
+  <body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
+      <!-- Header -->
+      <header id="header" class="alt">
+        <a href="/" class="logo"
+          ><strong>Authors'</strong> <span>Favorite Books</span></a
+        >
+        <nav>
+          <a href="#menu">Menu</a>
+        </nav>
+      </header>
+
+      <!-- Menu -->
+      <nav id="menu">
+        <ul class="links">
+          <li><a href="/">Authors</a></li>
+          <li><a href="/books">Books</a></li>
+        </ul>
+      </nav>
+
+      <!-- Main -->
+      <div id="main" class="alt">
+        <!-- One -->
+        <section id="one">
+          <div class="inner">
+            <header class="major">
+              {% if author %}
+              <h1>{{author.first_name}} {{author.last_name}}</h1>
+              {% else %}
+              <h1>{{book.title}}</h1>
+              {% endif %}
+            </header>
+          </div>
+        </section>
+      </div>
+
+      <!-- Contact -->
+      <section id="contact">
+        <div class="inner">
+          <section>
+            {% if author %}
+            <form method="post" action="/favorite/create">
+              <input type="hidden" name="author_id" value="{{author.id}}" />
+              <div class="fields">
+                <div class="col-12">
+                  <select name="book_id" id="demo-category">
+                    <option value="">- Books -</option>
+                    {% for book in all_books %}
+                    <option value="{{book.id}}">{{book.title}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <ul class="actions">
+                <li>
+                  <input type="submit" value="Add Favorite" class="primary" />
+                </li>
+              </ul>
+            </form>
+            {% else %}
+            <form method="post" action="/favorite/create">
+              <input type="hidden" name="book_id" value="{{book.id}}" />
+              <div class="fields">
+                <div class="col-12">
+                  <select name="author_id" id="demo-category">
+                    <option value="">- Author -</option>
+                    {% for author in all_authors %}
+                    <option value="{{author.id}}">
+                      {{author.first_name}} {{author.last_name}}
+                    </option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <ul class="actions">
+                <li>
+                  <input type="submit" value="Add Favorite" class="primary" />
+                </li>
+              </ul>
+            </form>
+            {% endif %}
+          </section>
+          <section class="split">
+            <section>
+              <div class="contact-method">
+                <span class="icon solid alt fa-thumbs-up"></span>
+                {% if author %}
+                <h3>Favorite Books</h3>
+                <ul class="alt">
+                  {% for book in books %}
+                  <li>{{book.title}}</li>
+                  {% endfor %}
+                </ul>
+                {% else %}
+                <h3>Authors That Favorited</h3>
+                <ul class="alt">
+                  {% for author in authors %}
+                  <li>{{author.first_name}} {{author.last_name}}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
+              </div>
+            </section>
+          </section>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer id="footer">
+        <div class="inner">
+          <ul class="icons">
+            <li>
+              <a
+                href="https://www.linkedin.com/in/luke-maclean/"
+                class="icon brands fa-linkedin-in"
+                ><span class="label">LinkedIn</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/MacLeanLuke"
+                class="icon brands fa-github"
+                ><span class="label">GitHub</span></a
+              >
+            </li>
+          </ul>
+          <ul class="copyright">
+            <li>&copy; Untitled</li>
+            <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="static/assets/js/jquery.min.js"></script>
+    <script src="static/assets/js/jquery.scrolly.min.js"></script>
+    <script src="static/assets/js/jquery.scrollex.min.js"></script>
+    <script src="static/assets/js/browser.min.js"></script>
+    <script src="static/assets/js/breakpoints.min.js"></script>
+    <script src="static/assets/js/util.js"></script>
+    <script src="static/assets/js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<!--
+	Forty by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+  <head>
+    <title>Authors Favorite Books</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="static/assets/css/main.css" />
+    <noscript
+      ><link rel="stylesheet" href="static/assets/css/noscript.css"
+    /></noscript>
+  </head>
+  <body class="is-preload">
+    <!-- Wrapper -->
+    <div id="wrapper">
+      <!-- Header -->
+      <header id="header" class="alt">
+        <a href="/" class="logo"
+          ><strong>Authors</strong> <span>Favorite Books</span></a
+        >
+        <nav>
+          <a href="#menu">Menu</a>
+        </nav>
+      </header>
+
+      <!-- Menu -->
+      <nav id="menu">
+        <ul class="links">
+          <li><a href="/">Authors</a></li>
+		  <li><a href="/books">Books</a></li>
+        </ul>
+      </nav>
+
+      <!-- Banner -->
+      <section id="banner" class="major">
+        <div class="inner">
+          <header class="major">
+            <h1>Hi, my name is Edith</h1>
+          </header>
+          <div class="content">
+            <p>
+              This is my database of Authors<br />
+              and their Favorite Books!
+            </p>
+            <ul class="actions">
+              <li>
+                <a href="#one" class="button next scrolly">Get Started</a>
+              </li>
+            </ul>
+          </div>
+		  {% if authors %}
+		  <h2>Authors</h2>
+		  {% else %}
+		  <h2>Books</h2>
+		  {% endif %}
+        </div>
+      </section>
+      <!-- Main -->
+      <div id="main">
+		  
+        <!-- One -->
+        <section id="one" class="tiles">
+			{% for author in authors %}
+          <article>
+            <span class="image">
+              <img src="static/images/pic01.jpg" alt="" />
+            </span>
+            <header class="major">
+              <h3><a href="/author/{{author.id}}" class="link">{{author.first_name}} {{author.last_name}}</a></h3>
+            </header>
+          </article>
+		  {% endfor %}
+		  {% for book in books %}
+          <article>
+            <span class="image">
+              <img src="static/images/pic01.jpg" alt="" />
+            </span>
+            <header class="major">
+              <h3><a href="/book/{{book.id}}" class="link">{{book.title}}</a></h3>
+            </header>
+          </article>
+		  {% endfor %}
+        </section>
+<hr>
+      <!-- Contact -->
+      <section id="contact">
+        <div class="inner">
+          <section>
+			  {% if authors %}
+            <form method="post" action="/author/create">
+              <div class="fields">
+                <div class="field half">
+                  <label for="first_name">First Name</label>
+                  <input type="text" name="first_name" id="name" />
+                </div>
+                <div class="field half">
+                  <label for="last_name">Last Name</label>
+                  <input type="text" name="last_name" id="name" />
+                </div>
+              </div>
+              <ul class="actions">
+                <li>
+                  <input type="submit" value="New Author" class="primary" />
+                </li>
+                <li><input type="reset" value="Clear" /></li>
+              </ul>
+            </form>
+			{% else %}
+			<form method="post" action="/dojos/create">
+				<div class="fields">
+				  <div class="field">
+					<label for="title">Title</label>
+					<input type="text" name="title" id="name" />
+				  </div>
+				</div>
+				<ul class="actions">
+				  <li>
+					<input type="submit" value="New Title" class="primary" />
+				  </li>
+				  <li><input type="reset" value="Clear" /></li>
+				</ul>
+			  </form>
+			{% endif %}
+          </section>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer id="footer">
+        <div class="inner">
+          <ul class="icons">
+            <li>
+                <a
+                  href="https://www.linkedin.com/in/luke-maclean/"
+                  class="icon brands fa-linkedin-in"
+                  ><span class="label">LinkedIn</span></a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://github.com/MacLeanLuke"
+                  class="icon brands fa-github"
+                  ><span class="label">GitHub</span></a
+                >
+              </li>
+          </ul>
+          <ul class="copyright">
+            <li>&copy; Luke MacLean</li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="static/assets/js/jquery.min.js"></script>
+    <script src="static/assets/js/jquery.scrolly.min.js"></script>
+    <script src="static/assets/js/jquery.scrollex.min.js"></script>
+    <script src="static/assets/js/browser.min.js"></script>
+    <script src="static/assets/js/breakpoints.min.js"></script>
+    <script src="static/assets/js/util.js"></script>
+    <script src="static/assets/js/main.js"></script>
+  </body>
+</html>
